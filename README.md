@@ -26,14 +26,13 @@ gcloud compute instances create $INSTANCE_NAME \
 # create an alias for this in ~/.bash_aliases
 gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
 
-# update fastai repo
-cd ~/tutorials/fastai/course-v3/
-git checkout .
-git pull
-cd ~
+# download repo
+git clone https://github.com/Huizerd/kaggle.git
 
-# update/install libraries
-sudo /opt/anaconda3/bin/conda install -c fastai fastai
+# update fastai repo + library and pytorch
+./kaggle/update.sh
+
+# install kaggle
 sudo /opt/anaconda3/bin/conda install -c conda-forge kaggle
 
 # start jupyter in local browser: localhost:8080/tree
@@ -45,13 +44,9 @@ sudo /opt/anaconda3/bin/conda install -c conda-forge kaggle
 # move credentials to correct folder
 mv ~/kaggle.json .kaggle/
 
-# download repo
-git clone https://github.com/Huizerd/kaggle.git
-cd ~/kaggle/
-
 # download cactus competition data
-mkdir -p cactuses/data/aerial-cactus-identification/
-cd cactuses/data/aerial-cactus-identification/
+mkdir -p ~/kaggle/cactuses/data/aerial-cactus-identification/
+cd ~/kaggle/cactuses/data/aerial-cactus-identification/
 kaggle competitions download -c aerial-cactus-identification
 
 # unzip and remove
@@ -65,13 +60,6 @@ rm test.zip
 # connect to instance
 gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
 
-# update fastai repo
-cd ~/tutorials/fastai/course-v3/
-git checkout .
-git pull
-cd ~
-
-# update/install libraries
-sudo /opt/anaconda3/bin/conda install -c fastai fastai
-sudo /opt/anaconda3/bin/conda install -c pytorch pytorch torchvision
+# update
+./kaggle/update.sh
 ```
