@@ -26,6 +26,10 @@ gcloud compute instances create $INSTANCE_NAME \
 # create an alias for this in ~/.bash_aliases
 gcloud compute ssh --zone=$ZONE jupyter@$INSTANCE_NAME -- -L 8080:localhost:8080
 
+# configure git
+git config --global user.name <name>
+git config --global user.email <e>@<mail>.com
+
 # download repo
 git clone https://github.com/Huizerd/kaggle.git
 
@@ -45,8 +49,8 @@ sudo /opt/anaconda3/bin/conda install -c conda-forge kaggle
 mv ~/kaggle.json .kaggle/
 
 # download cactus competition data
-mkdir -p ~/kaggle/cactuses/data/aerial-cactus-identification/
-cd ~/kaggle/cactuses/data/aerial-cactus-identification/
+mkdir -p ~/kaggle/cactuses/data/
+cd ~/kaggle/cactuses/data/
 kaggle competitions download -c aerial-cactus-identification
 
 # unzip and remove
