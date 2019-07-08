@@ -45,9 +45,13 @@ sudo /opt/anaconda3/bin/conda install -c conda-forge kaggle
 # move credentials to correct folder
 mv ~/kaggle.json .kaggle/
 
-# download competition data
-mkdir -p data/aerial-cactus-identification/
-cd data/aerial-cactus-identification/
+# download repo
+git clone https://github.com/Huizerd/kaggle.git
+cd ~/kaggle/
+
+# download cactus competition data
+mkdir -p cactuses/data/aerial-cactus-identification/
+cd cactuses/data/aerial-cactus-identification/
 kaggle competitions download -c aerial-cactus-identification
 
 # unzip and remove
@@ -55,12 +59,6 @@ unzip train.zip
 unzip test.zip
 rm train.zip
 rm test.zip
-
-# download cactuses repo
-cd ~
-git clone https://github.com/Huizerd/cactuses.git
-
-
 
 ## RESTART
 
