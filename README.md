@@ -43,7 +43,7 @@ pre-commit install
 
 # create filter for nbstripout
 # to strip notebook output
-sudo conda install -c conda-forge nbstripout
+sudo conda install -c conda-forge nbstripout nbconvert
 nbstripout --install
 
 # install kaggle
