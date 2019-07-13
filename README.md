@@ -36,8 +36,18 @@ git clone https://github.com/Huizerd/kaggle.git
 # update fastai repo + library and pytorch
 ./kaggle/update.sh
 
+# create pre-commit hook for black formatter
+sudo conda install -c conda-forge pre_commit
+cd ~/kaggle/
+pre-commit install
+
+# create filter for nbstripout
+# to strip notebook output
+sudo conda install -c conda-forge nbstripout
+nbstripout --install
+
 # install kaggle
-sudo /opt/anaconda3/bin/conda install -c conda-forge kaggle
+sudo conda install -c conda-forge kaggle
 
 # start jupyter in local browser: localhost:8080/tree
 
@@ -49,15 +59,14 @@ sudo /opt/anaconda3/bin/conda install -c conda-forge kaggle
 mv ~/kaggle.json .kaggle/
 
 # download cactus competition data
-mkdir -p ~/kaggle/cactuses/data/
-cd ~/kaggle/cactuses/data/
-kaggle competitions download -c aerial-cactus-identification
+kaggle competitions download -c aerial-cactus-identification -p ~/kaggle/cactuses/data/
 
 # unzip and remove
+# add option -d to unzip to dir
+cd ~/kaggle/cactuses/data/
 unzip train.zip
 unzip test.zip
-rm train.zip
-rm test.zip
+rm *.zip
 
 ## RESTART
 
